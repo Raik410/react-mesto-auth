@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
-import * as auth from '../utils/auth.js';
 function Login(props) {
-    const [message, setMessage] = useState('');
   const [formParams, setFormParams] = useState({
     email: "",
     password: "",
@@ -22,9 +20,6 @@ function Login(props) {
         return;
       }
       props.handleLogin({ email: formParams.email, password: formParams.password })
-      .catch(err => {
-                setMessage(err.message);
-              });
   }
 
   return (
@@ -32,7 +27,6 @@ function Login(props) {
       <h2 className="login__title">Вход</h2>
       <div className="login__container">
         <form onSubmit={handleSumbit} className="login__form">
-            {message}
           <input
             className="login__input"
             type="email"

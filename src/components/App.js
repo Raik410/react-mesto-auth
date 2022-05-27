@@ -139,6 +139,9 @@ function App() {
         return data
       }
     })
+    .catch((err) => {
+      console.err(`Ошибка... ${err}`)
+    })
   }
 
   function handleRegister({email, password}) {
@@ -147,8 +150,9 @@ function App() {
             setInfoToolTip({isOpen: true, status: true, messageText: "Вы успешно зарегистрировались!"})
             history.push('/sign-in');
           })
-          .catch(() => {
+          .catch((err) => {
             setInfoToolTip({isOpen: true, status: false, messageText: "Что-то пошло не так."})
+            console.err(`Ошибка... ${err}`)
           })
   }
 
@@ -164,7 +168,10 @@ function App() {
           setUserData(userData.email);
           history.push('/');
         }
-      });
+      })
+      .catch((err) => {
+        console.err(`Ошибка... ${err}`)
+      })
     }
   }
 
