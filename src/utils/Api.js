@@ -74,9 +74,9 @@ export class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-39",
+  baseUrl: "http://api.mesto.raiki.nomorepartiesxyz.ru",
   headers: {
-    authorization: "edcdf9ce-a80f-4960-87f2-b6b93e17bf9b",
+    Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json",
   },
 });

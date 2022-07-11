@@ -27,7 +27,7 @@ function App() {
   const history = useHistory();
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked)
     .then((newCard) => {
@@ -161,8 +161,9 @@ function App() {
       let jwt = localStorage.getItem('jwt');
       auth.token(jwt).then((res) => {
         if (res){
+          console.log(res)
           let userData = {
-            email: res.data.email
+            email: res.email
           }
           setLoggedIn(true);
           setUserData(userData.email);

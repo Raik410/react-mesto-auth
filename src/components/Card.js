@@ -4,7 +4,7 @@ function Card({ onCardDelete, onCardLike, card, onCardClick, userContext }) {
   function handleCardClick() {
     onCardClick(card);
   }
-
+  console.log(userContext)
   function handleLikeClick() {
     onCardLike(card);
   }
@@ -13,11 +13,11 @@ function Card({ onCardDelete, onCardLike, card, onCardClick, userContext }) {
     onCardDelete(card)
   }
 
-  const isOwn = card.owner._id === userContext._id;
+  const isOwn = card.owner === userContext._id;
   const cardDeleteButtonClassName = `card__button-card-detele ${
     isOwn ? "card__delete-button_visible" : "card__button-card-detele-hidden"
   }`;
-  const isLiked = card.likes.some((i) => i._id === userContext._id);
+  const isLiked = card.likes.some(i => i === userContext._id);
   const cardLikeButtonClassName = `card__heart ${
     isLiked ? "card__heart_active" : "card__heart"
   }`;

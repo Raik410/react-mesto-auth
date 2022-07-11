@@ -13,7 +13,6 @@ function Main({
 }) {
   const cards = React.useContext(CardsContext);
   const userContext = React.useContext(CurrentUserContext);
-
   return (
     <main>
       <section className="profile">
