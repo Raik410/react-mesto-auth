@@ -19,11 +19,37 @@ export class Api {
   }
 
   getProfile() {
-    return this._makeRequest('/users/me')
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(res.status);
+    });
   }
 
   getInitialCards() {
-    return this._makeRequest('/cards')
+    return fetch(`${this.baseUrl}/cards`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(res.status);
+    });
   }
 
   changeLikeCardStatus(id, isLiked) {

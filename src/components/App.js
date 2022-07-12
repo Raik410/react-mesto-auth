@@ -45,24 +45,16 @@ function App() {
   }
 
   useEffect(() => {
-    api.getProfile()
-    .then((userData) => {
-      setCurrentUser(userData);
-    })
-    .catch((err) => console.err(`Ошибка ${err}`))
-  }, [])
-
-  useEffect(() => {
-    api.getInitialCards()
-    .then((dataCards) => {
-      setCards(dataCards);
-    })
-    .catch((err) => console.err(`Ошибка ${err}`))
-  }, [])
-
-  useEffect(() => {
     tokenCheck()
-  }, [])
+    if (loggedIn) {
+      Promise.all([api.getProfile(), api.getInitialCards()])
+      .then(([user, cardData]) => {
+        setCurrentUser(user);
+        setCards(cardData);
+      })
+      .catch((err) => console.err(`Ошибка ${err}`))
+    }
+  }, [loggedIn])
 
 
   function handleUpdateUser(data) {
