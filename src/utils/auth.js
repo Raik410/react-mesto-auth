@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.mesto.raiki.nomorepartiesxyz.ru';
+export const BASE_URL = 'https://api.mesto.raiki.nomorepartiesxyz.ru';
 
 const checkResponse = (res) => {
   if (res.ok) {
