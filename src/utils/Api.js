@@ -7,7 +7,10 @@ export class Api {
   _makeRequest(path, method, body) {
     return fetch(this.baseUrl + path, {
       method: method || "GET",
-      headers: this.headers,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        "Content-Type": "application/json",
+      },
       ...body,
     }).then((res) => {
       if (res.ok) {
@@ -19,37 +22,11 @@ export class Api {
   }
 
   getProfile() {
-    return fetch(`${this.baseUrl}/users/me`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(res.status);
-    });
+    return this._makeRequest("/users/me");
   }
 
   getInitialCards() {
-    return fetch(`${this.baseUrl}/cards`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(res.status);
-    });
+    return this._makeRequest("/cards");
   }
 
   changeLikeCardStatus(id, isLiked) {
